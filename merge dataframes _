@@ -1,0 +1,847 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "7524fe9f",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "76fd2321",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "a231d469",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    " tem_df= pd.DataFrame({\n",
+    "     \"City\": [\"dhaka\", \"cumilla\",\"rajshahi\",\"khulna\"] ,\n",
+    "    \"temperature\" : [32,45,30,30] ,\n",
+    " })\n",
+    "wind_df = pd.DataFrame({\n",
+    "    \"City\": [\"cumilla\", \"dhaka\",\"rajshahi\"] ,\n",
+    "    \"windspeed\" : [35,85,90] ,\n",
+    "} , index =[0,1,2])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "6f6b80b8",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>City</th>\n",
+       "      <th>temperature</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>dhaka</td>\n",
+       "      <td>32</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cumilla</td>\n",
+       "      <td>45</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>rajshahi</td>\n",
+       "      <td>30</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>khulna</td>\n",
+       "      <td>30</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       City  temperature\n",
+       "0     dhaka           32\n",
+       "1   cumilla           45\n",
+       "2  rajshahi           30\n",
+       "3    khulna           30"
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "tem_df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "e0be5076",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>City</th>\n",
+       "      <th>windspeed</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>cumilla</td>\n",
+       "      <td>35</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>dhaka</td>\n",
+       "      <td>85</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>rajshahi</td>\n",
+       "      <td>90</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       City  windspeed\n",
+       "0   cumilla         35\n",
+       "1     dhaka         85\n",
+       "2  rajshahi         90"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "wind_df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "449b6d4b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df3 =pd.merge(tem_df, wind_df , on=\"City\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "c40c9a12",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>City</th>\n",
+       "      <th>temperature</th>\n",
+       "      <th>windspeed</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>dhaka</td>\n",
+       "      <td>32</td>\n",
+       "      <td>85</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cumilla</td>\n",
+       "      <td>45</td>\n",
+       "      <td>35</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>rajshahi</td>\n",
+       "      <td>30</td>\n",
+       "      <td>90</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       City  temperature  windspeed\n",
+       "0     dhaka           32         85\n",
+       "1   cumilla           45         35\n",
+       "2  rajshahi           30         90"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df3"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "26ef64fe",
+   "metadata": {},
+   "source": [
+    "## taking out join "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "fc9af2d2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df3 =pd.merge(tem_df, wind_df , on=\"City\" , how=\"outer\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "8af0e11e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>City</th>\n",
+       "      <th>temperature</th>\n",
+       "      <th>windspeed</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>cumilla</td>\n",
+       "      <td>45</td>\n",
+       "      <td>35.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>dhaka</td>\n",
+       "      <td>32</td>\n",
+       "      <td>85.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>khulna</td>\n",
+       "      <td>30</td>\n",
+       "      <td>NaN</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>rajshahi</td>\n",
+       "      <td>30</td>\n",
+       "      <td>90.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       City  temperature  windspeed\n",
+       "0   cumilla           45       35.0\n",
+       "1     dhaka           32       85.0\n",
+       "2    khulna           30        NaN\n",
+       "3  rajshahi           30       90.0"
+      ]
+     },
+     "execution_count": 21,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df3"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "3b78d874",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>City</th>\n",
+       "      <th>temperature</th>\n",
+       "      <th>windspeed</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>cumilla</td>\n",
+       "      <td>45</td>\n",
+       "      <td>35.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>dhaka</td>\n",
+       "      <td>32</td>\n",
+       "      <td>85.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>khulna</td>\n",
+       "      <td>30</td>\n",
+       "      <td>no value</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>rajshahi</td>\n",
+       "      <td>30</td>\n",
+       "      <td>90.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       City  temperature windspeed\n",
+       "0   cumilla           45      35.0\n",
+       "1     dhaka           32      85.0\n",
+       "2    khulna           30  no value\n",
+       "3  rajshahi           30      90.0"
+      ]
+     },
+     "execution_count": 25,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df3.replace(np.NaN,\"no value\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d37452cf",
+   "metadata": {},
+   "source": [
+    "## by the indicator form we can know that where the data came from"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "bf475e31",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df3 =pd.merge(tem_df, wind_df , on=\"City\" , how=\"outer\" , indicator=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "id": "fb598741",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>City</th>\n",
+       "      <th>temperature</th>\n",
+       "      <th>windspeed</th>\n",
+       "      <th>_merge</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>cumilla</td>\n",
+       "      <td>45</td>\n",
+       "      <td>35.0</td>\n",
+       "      <td>both</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>dhaka</td>\n",
+       "      <td>32</td>\n",
+       "      <td>85.0</td>\n",
+       "      <td>both</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>khulna</td>\n",
+       "      <td>30</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>left_only</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>rajshahi</td>\n",
+       "      <td>30</td>\n",
+       "      <td>90.0</td>\n",
+       "      <td>both</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       City  temperature  windspeed     _merge\n",
+       "0   cumilla           45       35.0       both\n",
+       "1     dhaka           32       85.0       both\n",
+       "2    khulna           30        NaN  left_only\n",
+       "3  rajshahi           30       90.0       both"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df3"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d46163ad",
+   "metadata": {},
+   "source": [
+    "## How to use \"suffixxes() argument in dataframe\""
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "id": "24477aa8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df1= pd.DataFrame({\n",
+    "     \"City\": [\"dhaka\", \"cumilla\",\"rajshahi\",\"khulna\"] ,\n",
+    "    \"temperature\" : [57,24,34,20] , \n",
+    "    'Humidity' :[56,34,23,42]\n",
+    " })\n",
+    "df2= pd.DataFrame({\n",
+    "     \"City\": [\"dhaka\", \"cumilla\",\"rajshahi\",\"khulna\"] ,\n",
+    "    \"temperature\" : [32,45,30,30] ,\n",
+    "    'Humidity' :[59,39,33,47]\n",
+    " })\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "1568b4fe",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>City</th>\n",
+       "      <th>temperature</th>\n",
+       "      <th>Humidity</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>dhaka</td>\n",
+       "      <td>57</td>\n",
+       "      <td>56</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cumilla</td>\n",
+       "      <td>24</td>\n",
+       "      <td>34</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>rajshahi</td>\n",
+       "      <td>34</td>\n",
+       "      <td>23</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>khulna</td>\n",
+       "      <td>20</td>\n",
+       "      <td>42</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       City  temperature  Humidity\n",
+       "0     dhaka           57        56\n",
+       "1   cumilla           24        34\n",
+       "2  rajshahi           34        23\n",
+       "3    khulna           20        42"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "id": "33e474fe",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>City</th>\n",
+       "      <th>temperature</th>\n",
+       "      <th>Humidity</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>dhaka</td>\n",
+       "      <td>32</td>\n",
+       "      <td>59</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cumilla</td>\n",
+       "      <td>45</td>\n",
+       "      <td>39</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>rajshahi</td>\n",
+       "      <td>30</td>\n",
+       "      <td>33</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>khulna</td>\n",
+       "      <td>30</td>\n",
+       "      <td>47</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       City  temperature  Humidity\n",
+       "0     dhaka           32        59\n",
+       "1   cumilla           45        39\n",
+       "2  rajshahi           30        33\n",
+       "3    khulna           30        47"
+      ]
+     },
+     "execution_count": 34,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "id": "b58a9dc7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df3 =pd.merge(df1,df2,on=\"City\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "id": "7844048a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>City</th>\n",
+       "      <th>temperature_x</th>\n",
+       "      <th>Humidity_x</th>\n",
+       "      <th>temperature_y</th>\n",
+       "      <th>Humidity_y</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>dhaka</td>\n",
+       "      <td>57</td>\n",
+       "      <td>56</td>\n",
+       "      <td>32</td>\n",
+       "      <td>59</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cumilla</td>\n",
+       "      <td>24</td>\n",
+       "      <td>34</td>\n",
+       "      <td>45</td>\n",
+       "      <td>39</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>rajshahi</td>\n",
+       "      <td>34</td>\n",
+       "      <td>23</td>\n",
+       "      <td>30</td>\n",
+       "      <td>33</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>khulna</td>\n",
+       "      <td>20</td>\n",
+       "      <td>42</td>\n",
+       "      <td>30</td>\n",
+       "      <td>47</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       City  temperature_x  Humidity_x  temperature_y  Humidity_y\n",
+       "0     dhaka             57          56             32          59\n",
+       "1   cumilla             24          34             45          39\n",
+       "2  rajshahi             34          23             30          33\n",
+       "3    khulna             20          42             30          47"
+      ]
+     },
+     "execution_count": 39,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df3"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e330a9cb",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
